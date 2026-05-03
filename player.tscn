@@ -4,8 +4,18 @@
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_hqtel"]
 
-[node name="Player" type="Node3D" unique_id=482471087]
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_4flbx"]
+
+[node name="Player" type="RigidBody3D" unique_id=32133805]
+axis_lock_linear_z = true
+axis_lock_angular_x = true
+axis_lock_angular_y = true
+linear_damp = 1.0
+angular_damp = 3.0
 script = ExtResource("1_4flbx")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=2106228600]
 mesh = SubResource("CylinderMesh_hqtel")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=243170803]
+shape = SubResource("CylinderShape3D_4flbx")
