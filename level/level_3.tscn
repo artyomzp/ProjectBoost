@@ -1,6 +1,7 @@
-[gd_scene format=3 uid="uid://bffs0yqr2jdrx"]
+[gd_scene format=3 uid="uid://cvleleoodnfxk"]
 
-[ext_resource type="PackedScene" uid="uid://ckudr8chj1kgo" path="res://player.tscn" id="1_u52ul"]
+[ext_resource type="Script" uid="uid://vp661gewshax" path="res://level/LandingPad.gd" id="1_octfv"]
+[ext_resource type="PackedScene" uid="uid://ckudr8chj1kgo" path="res://player.tscn" id="2_ypwww"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_5xgho"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -18,6 +19,9 @@ glow_enabled = true
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5xgho"]
 albedo_color = Color(0.43689093, 0.2889831, 0.1413953, 1)
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lo0xd"]
+albedo_color = Color(0.532574, 0.1304963, 0.74213994, 1)
+
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_u52ul"]
 albedo_color = Color(0.2784314, 0.28627452, 1, 1)
 
@@ -33,11 +37,17 @@ environment = SubResource("Environment_vonw3")
 transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 0, 0)
 shadow_enabled = true
 
-[node name="Floor" type="CSGBox3D" parent="." unique_id=1862779799 groups=["Floor"]]
+[node name="Floor" type="CSGBox3D" parent="." unique_id=1862779799 groups=["Hazard"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -4, 0)
 use_collision = true
 size = Vector3(30, 8, 5)
 material = SubResource("StandardMaterial3D_5xgho")
+
+[node name="Obstacle" type="CSGBox3D" parent="." unique_id=912579131 groups=["Hazard"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 8.146616, 0)
+use_collision = true
+size = Vector3(3, 3, 3)
+material = SubResource("StandardMaterial3D_lo0xd")
 
 [node name="LaunchPad" type="CSGBox3D" parent="." unique_id=969235108]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.5, -1, 0)
@@ -50,9 +60,12 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.566143, -1, 0)
 use_collision = true
 size = Vector3(3, 3, 3)
 material = SubResource("StandardMaterial3D_vonw3")
+script = ExtResource("1_octfv")
+file_path = "uid://bffs0yqr2jdrx"
 
 [node name="Camera3D" type="Camera3D" parent="." unique_id=1252302147]
 transform = Transform3D(1, 0, 0, 0, 0.97437006, 0.22495104, 0, -0.22495104, 0.97437006, 0, 5, 7.5)
 
-[node name="Player" parent="." unique_id=482471087 instance=ExtResource("1_u52ul")]
+[node name="Player" parent="." unique_id=482471087 instance=ExtResource("2_ypwww")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.5, 1.5070364, 0)
+trust = null
