@@ -8,7 +8,10 @@ extends RigidBody3D
 
 @onready var explosion_audio: AudioStreamPlayer = $ExplosionAudio
 @onready var success_audio: AudioStreamPlayer = $SuccessAudio
-@onready var rocket_engine: AudioStreamPlayer3D = $RocketEngine
+@onready var rocket_audio: AudioStreamPlayer3D = $RocketEngine
+@onready var boost_particles: GPUParticles3D = $BoosterParticles
+@onready var right_boost_particles: GPUParticles3D = $RightBoosterParticles
+@onready var left_boost_particles: GPUParticles3D = $LeftBoosterParticles
 
 var is_transitioning: bool = false
 
@@ -17,17 +20,25 @@ func _ready() -> void:
 
 func _process(delta: float) -> void:
 	if Input.is_action_pressed("boost"):
-		if rocket_engine.playing == false:
-			rocket_engine.play()
 		apply_central_force(basis.y * delta * trust)
+		boost_particles.emitting = true
+		if rocket_audio.playing == false:
+			rocket_audio.play()
 	else:
-		rocket_engine.stop()
+		rocket_audio.stop()
+		boost_particles.emitting = false
 		
 	if Input.is_action_pressed("left"):
 		apply_torque(Vector3(0.0, 0.0, torque_trust * delta))
+		right_boost_particles.emitting = true
+	else:
+		right_boost_particles.emitting = false
 		
 	if Input.is_action_pressed("right"):
 		apply_torque(Vector3(0.0, 0.0, -torque_trust * delta))
+		left_boost_particles.emitting = true
+	else:
+		left_boost_particles.emitting = false
 
 
 func _on_body_entered(body: Node) -> void:
