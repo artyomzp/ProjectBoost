@@ -12,6 +12,8 @@ extends RigidBody3D
 @onready var boost_particles: GPUParticles3D = $BoosterParticles
 @onready var right_boost_particles: GPUParticles3D = $RightBoosterParticles
 @onready var left_boost_particles: GPUParticles3D = $LeftBoosterParticles
+@onready var explosion_particles: GPUParticles3D = $ExplosionParticles
+@onready var success_particles: GPUParticles3D = $SuccessParticles
 
 var is_transitioning: bool = false
 
@@ -57,6 +59,7 @@ func crash_sequence() -> void:
 	var tween = create_tween()
 	tween.tween_interval(2.5)
 	tween.tween_callback(get_tree().reload_current_scene)
+	explosion_particles.emitting = true
 	
 func complete_level(next_level_file: String) -> void:
 	print("Win")
@@ -68,6 +71,7 @@ func complete_level(next_level_file: String) -> void:
 	tween.tween_callback(
 		get_tree().change_scene_to_file.bind(next_level_file)
 	)
+	success_particles.emitting = true
 	
 	
 	

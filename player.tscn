@@ -4,7 +4,9 @@
 [ext_resource type="AudioStream" uid="uid://bxnosrvxscaeo" path="res://Audio/SFX - Death Explosion.ogg" id="2_onrkg"]
 [ext_resource type="AudioStream" uid="uid://crjpr7oe1ljh3" path="res://Audio/SFX - Success.ogg" id="3_i3pqv"]
 [ext_resource type="AudioStream" uid="uid://b31l511siu75" path="res://Audio/SFX - Main engine thrust.ogg" id="4_hqtel"]
-[ext_resource type="PackedScene" path="res://booster_particles.tscn" id="5_sweqy"]
+[ext_resource type="PackedScene" uid="uid://ux6ivcx1ovdp" path="res://Particles/booster_particles.tscn" id="5_sweqy"]
+[ext_resource type="PackedScene" uid="uid://jfwajmrh6ca7" path="res://Particles/success_particles.tscn" id="6_1jxqw"]
+[ext_resource type="PackedScene" uid="uid://dcecb8hw7dbrv" path="res://Particles/explosion_particles.tscn" id="7_dw050"]
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_hqtel"]
 
@@ -46,5 +48,9 @@ emitting = false
 [node name="RightBoosterParticles" parent="." unique_id=1247687561 instance=ExtResource("5_sweqy")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.4, -1, 0)
 emitting = false
+
+[node name="SuccessParticles" parent="." unique_id=731249918 instance=ExtResource("6_1jxqw")]
+
+[node name="ExplosionParticles" parent="." unique_id=2062215000 instance=ExtResource("7_dw050")]
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
